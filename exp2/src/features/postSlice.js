@@ -17,7 +17,7 @@ const postSlice = createSlice({
       );
     },
   },
-});
+}); 
 
 export const { addPost, deletePost } = postSlice.actions;
 
