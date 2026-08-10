@@ -1,25 +1,7 @@
 import { jwtDecode } from "jwt-decode";
+import users from "../data/users";
 
-// Mock users
-const users = [
-  {
-    username: "admin",
-    password: "admin123",
-    role: "Admin",
-  },
-  {
-    username: "editor",
-    password: "editor123",
-    role: "Editor",
-  },
-  {
-    username: "viewer",
-    password: "viewer123",
-    role: "Viewer",
-  },
-];
-
-// Mock JWT generation
+// Generate mock JWT
 export const generateToken = (user) => {
   const header = btoa(
     JSON.stringify({
@@ -30,6 +12,7 @@ export const generateToken = (user) => {
 
   const payload = btoa(
     JSON.stringify({
+      id: user.id,
       username: user.username,
       role: user.role,
       iat: Date.now(),
@@ -74,15 +57,7 @@ export const getUserFromToken = () => {
   }
 
   try {
-    const parts = token.split(".");
-
-    if (parts.length !== 3) {
-      return null;
-    }
-
-    const payload = JSON.parse(atob(parts[1]));
-
-    return payload;
+    return jwtDecode(token);
   } catch (error) {
     console.error("Invalid token:", error);
     return null;
