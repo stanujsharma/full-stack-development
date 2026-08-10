@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check existing token when application starts
+  // Check existing JWT when application starts
   useEffect(() => {
     const currentUser = getUserFromToken();
 
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // Login function
+  // Login
   const login = (username, password) => {
     const token = loginUser(username, password);
 
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     return true;
   };
 
-  // Logout function
+  // Logout
   const logout = () => {
     logoutUser();
     setUser(null);
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook
+// Custom authentication hook
 export const useAuth = () => {
   return useContext(AuthContext);
 };

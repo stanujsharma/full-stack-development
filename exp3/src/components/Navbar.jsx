@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <h2>JWT RBAC App</h2>
+        <strong>JWT RBAC App</strong>
       </div>
 
       <div className="navbar-user">
@@ -22,14 +22,16 @@ const Navbar = () => {
         <Link to="/dashboard">Dashboard</Link>
 
         {user.role === "Admin" && (
-          <Link to="/admin">Admin</Link>
+          <Link to="/admin">Admin Panel</Link>
         )}
 
-        {(user.role === "Admin" || user.role === "Editor") && (
-          <Link to="/editor">Editor</Link>
+        {user.role === "Editor" && (
+          <Link to="/editor">Editor Panel</Link>
         )}
 
-        <Link to="/viewer">Viewer</Link>
+        {user.role === "Viewer" && (
+          <Link to="/viewer">Viewer Panel</Link>
+        )}
 
         <button onClick={logout}>Logout</button>
       </div>

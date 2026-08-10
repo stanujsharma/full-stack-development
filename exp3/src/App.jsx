@@ -19,17 +19,22 @@ function App() {
         <Navbar />
 
         <Routes>
+          {/* Login */}
           <Route path="/" element={<Login />} />
 
+          {/* Dashboard - All authenticated users */}
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute allowedRoles={["Admin", "Editor", "Viewer"]}>
+              <ProtectedRoute
+                allowedRoles={["Admin", "Editor", "Viewer"]}
+              >
                 <Dashboard />
               </ProtectedRoute>
             }
           />
 
+          {/* Admin - Admin only */}
           <Route
             path="/admin"
             element={
@@ -39,6 +44,7 @@ function App() {
             }
           />
 
+          {/* Editor - Admin and Editor */}
           <Route
             path="/editor"
             element={
@@ -48,6 +54,7 @@ function App() {
             }
           />
 
+          {/* Viewer - All authenticated users */}
           <Route
             path="/viewer"
             element={
@@ -59,9 +66,17 @@ function App() {
             }
           />
 
-          <Route path="/unauthorized" element={<Unauthorized />} />
+          {/* Unauthorized */}
+          <Route
+            path="/unauthorized"
+            element={<Unauthorized />}
+          />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* Invalid route */}
+          <Route
+            path="*"
+            element={<Navigate to="/" replace />}
+          />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
